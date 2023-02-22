@@ -1,6 +1,8 @@
 {% extends 'myapp/base.html' %}
 {% block body %}
-    <form action="">
+    <form method='post'>
+        {% csrf_token %}
         {{ expense_form }}
+        <button type="submit">Edit Data</button>
     </form>
 {% endblock %}
