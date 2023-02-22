@@ -34,4 +34,11 @@
         </div>
 
     </form>
+    <div>Expenses</div>
+    {% for expense in expenses %}
+        {{ expense.name }}
+        {{ expense.amount }}
+        {{ expense.category }}
+        {{ expense.date }}
+    {% endfor %}
 {% endblock %}
