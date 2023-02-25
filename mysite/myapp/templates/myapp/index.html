@@ -1,5 +1,6 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block body %}
 <div class="m-10 font-bold">Add Expense</div>
     <form class="shadow-lg m-10 rounded-lg" method="post">
@@ -49,7 +50,7 @@
         {% for expense in expenses %}
         <div class="expense-row flex flex-wrap px-20 py-5">
             <span class="font-bold">{{ expense.name }}</span>
-            <span class="font-bold">${{ expense.amount }}</span>
+            <span class="font-bold">${{ expense.amount|intcomma }}</span>
             <span class="font-bold">{{ expense.date }}</span>
             <span class="font-bold">{{ expense.category }}</span>
             <span class="pl-24"><a href="{% url 'edit' expense.id %}">
