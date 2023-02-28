@@ -98,9 +98,9 @@
             </h1>
         </div>
     </div>
-    <!-- show sum of expenses for past 30 days -->
-    <div class="flex">
 
+    <div class="flex">
+    <!-- show sum of expenses for past 30 days -->
 
         <div class="w-1/2 shadow-lg m-10">
             <div class="fles fles-wrap space-x-40 font-bold px-20 py-50">
@@ -125,12 +125,13 @@
         </div>
 
 
+        <!-- show expenses by category -->
         <div class="w-1/2 shadow-lg m-10">
             <div class="fles fles-wrap space-x-40 font-bold px-20 py-50">
                 <span>Categorical expenses</span>
             </div>
             <hr>
-            <div id="30-day-table">
+            <div id="cat-sum-table">
                 {% for categorical_sum in categorical_sums %}
                     <div class="fles flex-wrap px-20 py-5">
                         <span>
@@ -140,7 +141,7 @@
 
                     <div class="fles flex-wrap px-20 py-5">
                         <span class="text-green-500">
-                            ${{ categorical_sum.sum|intcomma }}
+                            ${{ categorical_sum.sum }}
                         </span>
                     </div>
                 {% endfor %}
@@ -149,4 +150,70 @@
 
     </div>
 
+    <div class="flex">
+        <div class="w-1/2 shadow-lg ml-10">
+            <h1 clas="m-10">Expense spread across categories</h1>
+            <canvas id="myChart" class="m-10"></canvas>
+        </div>
+
+        <div class="w-1/2 shadow-lg ml-10">
+
+        </div>
+    </div>
+    <!-- cdn for chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <!-- script for chart display -->
+    <script>
+        // add data to categories and category sums
+        const cats = []
+        const cat_sums = []
+
+        const catSumDiv = document.getElementById('cat-sum-table').getElementsByTagName('div')
+
+        for(i=0; i<catSumDiv.length; i++){
+            if(i%2 ==1){
+                cat_sums.push(catSumDiv[i].innerText.replace('$',''))
+            }else{
+                cats.push(catSumDiv[i].innerText)
+            }
+        }
+        // chart js code
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                // display data for categories
+                labels: cats,
+                datasets: [{
+                    label: 'Expense across categories',
+                    // display data for sums
+                    data: cat_sums,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 {% endblock %}
