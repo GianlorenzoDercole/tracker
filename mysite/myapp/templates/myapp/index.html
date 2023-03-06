@@ -99,23 +99,36 @@
         </div>
     </div>
 
+    <!-- code for charts -->
+    <div class="flex mt-10 mr-10">
+        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg ml-10">
+            <h1 class="m-10 ">Expense spread across categories</h1>
+            <canvas id="myChart" class="m-10"></canvas>
+        </div>
+
+        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg ml-10">
+            <h1 class="m-10">Daily expense sum</h1>
+            <canvas id="myChart1" class="m-10"></canvas>
+        </div>
+    </div>
+
+    
     <div class="flex">
     <!-- show sum of expenses for past 30 days -->
-
-        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg m-10">
+        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg ml-10 mt-10 mb-10">
             <div class="flex flex-wrap space-x-40 font-bold px-20 py-50">
                 <span>Past 30 days sum expenses</span>
             </div>
             <hr>
             <div id="30-day-table">
                 {% for daily_sum in daily_sums %}
-                    <div class="fles flex-wrap px-20 py-5">
+                    <div class="flex flex-wrap px-20 py-5">
                         <span>
                             {{ daily_sum.date }}
                         </span>
                     </div>
 
-                    <div class="fles flex-wrap px-20 py-5">
+                    <div class="flex flex-wrap px-20 py-5">
                         <span class="text-green-500">
                             ${{ daily_sum.sum }}
                         </span>
@@ -126,20 +139,20 @@
 
 
         <!-- show expenses by category -->
-        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg m-10">
+        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg ml-10 mt-10 mb-10 mr-10">
             <div class="flex flex-wrap space-x-40 font-bold px-20 py-50">
                 <span>Categorical expenses</span>
             </div>
             <hr>
             <div id="cat-sum-table">
                 {% for categorical_sum in categorical_sums %}
-                    <div class="fles flex-wrap px-20 py-5">
+                    <div class="flex flex-wrap px-20 py-5">
                         <span>
                             {{ categorical_sum.category }}
                         </span>
                     </div>
 
-                    <div class="fles flex-wrap px-20 py-5">
+                    <div class="flex flex-wrap px-20 py-5">
                         <span class="text-green-500">
                             ${{ categorical_sum.sum }}
                         </span>
@@ -148,18 +161,6 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="flex mb-10 mr-10">
-        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg ml-10">
-            <h1 class="m-10 ">Expense spread across categories</h1>
-            <canvas id="myChart" class="m-10"></canvas>
-        </div>
-
-        <div class="w-1/2 bg-gray-100 rounded-lg shadow-lg ml-10">
-            <h1 class="m-10">Daily expense sum</h1>
-            <canvas id="myChart1" class="m-10"></canvas>
-        </div>
     </div>
 
 
